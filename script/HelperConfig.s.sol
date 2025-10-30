@@ -10,7 +10,7 @@ pragma solidity ^0.8.0;
 import {Script} from "forge-std/Script.sol";
 import {MockV3Aggregator} from "../test/mocks/MockV3Aggregator.sol";
 
-contract HelperConfig is Script{
+contract HelperConfig is Script {
     // on a local anvil chain, we deploy mocks
     // on a real testnet or mainnet, we grab the address from the live network
     NetworkConfig public activeNetworkConfig;
@@ -31,7 +31,7 @@ contract HelperConfig is Script{
         }
     }
 
-    function getSepoliaEthConfig() public pure returns (NetworkConfig memory){
+    function getSepoliaEthConfig() public pure returns (NetworkConfig memory) {
         // price feed address
         NetworkConfig memory sepoliaConfig = NetworkConfig({
             priceFeed: 0x694AA1769357215DE4FAC081bf1f309aDC325306
@@ -39,7 +39,7 @@ contract HelperConfig is Script{
         return sepoliaConfig;
     }
 
-    function getMainnetEthConfig() public pure returns (NetworkConfig memory){
+    function getMainnetEthConfig() public pure returns (NetworkConfig memory) {
         // price feed address
         NetworkConfig memory ethConfig = NetworkConfig({
             priceFeed: 0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419
@@ -48,18 +48,17 @@ contract HelperConfig is Script{
     }
 
     function getOrCreateAnvilEthConfig() public returns (NetworkConfig memory) {
-        // price feed address 
+        // price feed address
         if (activeNetworkConfig.priceFeed != address(0)) {
             return activeNetworkConfig;
         }
-
 
         // 1. Deploy the mocks
         // 2. Return the mock address
 
         vm.startBroadcast();
         MockV3Aggregator mockPriceFeed = new MockV3Aggregator(
-            DECIMALS, 
+            DECIMALS,
             INITIAL_PRICE
         );
         vm.stopBroadcast();
