@@ -30,6 +30,7 @@ This is a minimal project allowing users to fund the contract owner with donatio
 - [Additional Info:](#additional-info)
   - [Let's talk about what "Official" means](#lets-talk-about-what-official-means)
   - [Summary](#summary)
+- [Extra](#extra)
 - [Thank you!](#thank-you)
 
 
@@ -235,6 +236,13 @@ So, then you have two options:
 1. That is an official repo maintained by the same org
 2. It downloads from the official release cycle `chainlink/contracts` use (npm) and packages it nicely for digestion from foundry.
    
+# Extra
+
+use the command 
+```
+git push --set-upstream origin main
+
+after using "git commit -m '<message>' "
 
 # Thank you!
 
