@@ -24,7 +24,7 @@ contract ZkSyncDevOps is Test, ZkSyncChainChecker, FoundryZkSyncChecker {
     // // `forge test --mt testZkSyncFoundryFails --zksync`
     // // and this will fail!
     function testZkSyncFoundryFails() public onlyVanillaFoundry {
-         bool exists = vm.keyExistsJson('{"hi": "true"}', ".hi");
-         assert(exists);
+        bool exists = vm.keyExistsJson('{"hi": "true"}', ".hi");
+        assert(exists);
     }
 }

@@ -1,4 +1,4 @@
-// Fund 
+// Fund
 // Withdraw
 
 // SPDX-License-Identifier: UNLICENSED

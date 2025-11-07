@@ -63,10 +63,11 @@ contract FundMeTest is Test {
     modifier funded() {
         vm.prank(USER);
         fundMe.fund{value: SEND_VALUE}();
-        _ ;
+        _;
     }
 
-    function testOnlyOwnerCanWithdraw() public funded { // Istead of adding more lines of code for funding, we use the funded modifier
+    function testOnlyOwnerCanWithdraw() public funded {
+        // Istead of adding more lines of code for funding, we use the funded modifier
         vm.prank(USER);
         vm.expectRevert();
         fundMe.withdraw();
@@ -86,10 +87,7 @@ contract FundMeTest is Test {
         uint256 endingFundMeBalance = address(fundMe).balance;
         uint256 endingOwnerBalance = fundMe.getOwner().balance;
         assertEq(endingFundMeBalance, 0);
-        assertEq(
-            startingFundMeBalance + startingOwnerBalance,
-            endingOwnerBalance
-        );
+        assertEq(startingFundMeBalance + startingOwnerBalance, endingOwnerBalance);
     }
 
     function testWithdrawFromMultipleFunders() public funded {
@@ -98,12 +96,12 @@ contract FundMeTest is Test {
         uint160 startingFunderIndex = 2;
         for (uint160 i = startingFunderIndex; i < numberOfFunders; i++) {
             // vm.prank
-            // vm. deal 
+            // vm. deal
             hoax(address(i), SEND_VALUE);
             fundMe.fund{value: SEND_VALUE}();
             // fund the fundMe
         }
-        // Act 
+        // Act
         uint256 startingOwnerBalance = fundMe.getOwner().balance;
         uint256 startingFundMeBalance = address(fundMe).balance;
 
@@ -113,10 +111,7 @@ contract FundMeTest is Test {
 
         // Assert
         assert(address(fundMe).balance == 0);
-        assert(
-            startingFundMeBalance + startingOwnerBalance == 
-            fundMe.getOwner().balance
-        );
+        assert(startingFundMeBalance + startingOwnerBalance == fundMe.getOwner().balance);
     }
 
     function testWithdrawFromMultipleFundersCheaper() public funded {
@@ -125,12 +120,12 @@ contract FundMeTest is Test {
         uint160 startingFunderIndex = 2;
         for (uint160 i = startingFunderIndex; i < numberOfFunders; i++) {
             // vm.prank
-            // vm. deal 
+            // vm. deal
             hoax(address(i), SEND_VALUE);
             fundMe.fund{value: SEND_VALUE}();
             // fund the fundMe
         }
-        // Act 
+        // Act
         uint256 startingOwnerBalance = fundMe.getOwner().balance;
         uint256 startingFundMeBalance = address(fundMe).balance;
 
@@ -140,20 +135,15 @@ contract FundMeTest is Test {
 
         // Assert
         assert(address(fundMe).balance == 0);
-        assert(
-            startingFundMeBalance + startingOwnerBalance == 
-            fundMe.getOwner().balance
-        );
+        assert(startingFundMeBalance + startingOwnerBalance == fundMe.getOwner().balance);
     }
 
     function testPrintStorageData() public funded {
-        for (uint256 i=0; i < 3; i++) {
+        for (uint256 i = 0; i < 3; i++) {
             bytes32 value = vm.load(address(fundMe), bytes32(i));
             console.log("Value at location", i, ":");
             console.logBytes32(value);
         }
         console.log("PriceFeed address:", address(fundMe.getPriceFeed()));
     }
-
-
 }
